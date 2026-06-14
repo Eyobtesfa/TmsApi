@@ -1,44 +1,65 @@
-
+using Microsoft.AspNetCore.Mvc;
+using Scalar.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddAuthentication("Training").AddScheme<AuthenticationSchemeOptions, TrainingAuthHandler>("Training", null);
+
+builder.Services.AddAuthentication("Training")
+    .AddScheme<AuthenticationSchemeOptions, TrainingAuthHandler>("Training", null);
 builder.Services.AddAuthorization();
 builder.Services.AddControllers();
+
 builder.Services.AddSingleton<EnrollmentWorker>();
 builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
+
 builder.Host.UseDefaultServiceProvider(options =>
 {
     options.ValidateScopes = true;
     options.ValidateOnBuild = true;
 });
+
 builder.Services.AddProblemDetails();
+builder.Services.AddOpenApi();
 
 /*builder.Services.AddOptions<PaymentOptions>()
     .BindConfiguration("Payments")
     .ValidateDataAnnotations()
     .ValidateOnStart();*/
-var app = builder.Build();
 
+var app = builder.Build();
 
 app.UseMiddleware<RequestLoggingMiddleware>();
 
-app.UseExceptionHandler("/error");
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.MapScalarApiReference();
+    app.UseExceptionHandler();
+}
+else
+{
+    app.UseExceptionHandler();
+}
+
+app.UseStatusCodePages();
 
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
 
+app.MapControllers();
+
+app.MapGet("/api/error", () =>
+{
+    throw new TmsDatabaseException("Simulated database failure for ProblemDetails testing");
+});
 
 app.MapPost("/api/enrollments/smoke-test", async (IEnrollmentService enrollmentService) =>
 {
-    // Try a successful initial enrollment
     var firstEnroll = await enrollmentService.EnrollAsync("S-001", "CS-101");
-
-    // Intentionally trigger the duplicate path
     var duplicateEnroll = await enrollmentService.EnrollAsync("S-001", "CS-101");
-
-    // Intentionally trigger a 'Not Found' lookup path
     var missingRecord = await enrollmentService.GetByIdAsync("invalid-id");
 
     return Results.Ok(new
@@ -48,24 +69,11 @@ app.MapPost("/api/enrollments/smoke-test", async (IEnrollmentService enrollmentS
     });
 });
 
-
-
 app.MapGet("/api/assessments/results", () => Results.Ok(new
 {
     courseCode = "CS-101",
     studentId = "S-001",
     letterGrade = "A"
 })).RequireAuthorization();
-
-app.MapGet("/api/error", () =>
-{
-    throw new TmsDatabaseException("Simulated database failure for ProblemDetails testing");
-});
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllers();
-
 
 app.Run();
