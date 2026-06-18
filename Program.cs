@@ -28,6 +28,19 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+
+var students = new List<Student>{
+    new Student("S-001", "Abeba"),
+    new Student("S-002", "Abebe"),
+    new Student("S-003", "Jack"),
+};
+
+var courses = new List<Course>
+{
+    new Course("C-01", "C#"),
+    new Course("C-02", "TypeScript")
+};
+
 app.UseMiddleware<RequestLoggingMiddleware>();
 
 if (app.Environment.IsDevelopment())
@@ -76,4 +89,41 @@ app.MapGet("/api/assessments/results", () => Results.Ok(new
     letterGrade = "A"
 })).RequireAuthorization();
 
+
+
+app.MapGet("/api/students", () =>
+{
+    return Results.Ok(students);
+});
+
+app.MapGet("/api/students/{id}", (string id) =>
+{
+    var student = students.FirstOrDefault(s => s.Id.ToLower() == id.ToLower());
+
+    if (student is null)
+    {
+        return Results.NotFound(new { message = $"Student with ID '{id}' was not found." });
+    }
+
+    return Results.Ok(student);
+});
+
+
+app.MapGet("/api/courses", () =>
+{
+    return Results.Ok(courses);
+});
+
+app.MapGet("/api/courses/{courseCode}", (string courseCode) =>
+{
+    var course = courses.FirstOrDefault(c => c.CourseCode.ToLower() == courseCode.ToLower());
+    if (course is null)
+    {
+        return Results.NotFound(new { message = $"Course with Course Code {courseCode} npt found" });
+    }
+    return Results.Ok(course);
+});
 app.Run();
+
+public record Student(string Id, string Name);
+public record Course(string CourseCode, string Name);
