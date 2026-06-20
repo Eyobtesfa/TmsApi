@@ -1,6 +1,6 @@
 @TmsApi_HostAddress = http://localhost:5294
 
-GET {{TmsApi_HostAddress}}/api/courses
+GET {{TmsApi_HostAddress}}//api/test/translation-fail
 Accept: application/json
 
 ###
