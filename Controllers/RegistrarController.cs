@@ -8,13 +8,29 @@ namespace TmsApi.Controllers;
 [Route("api/registrar")]
 public class RegistrarController(TmsDbContext context) : ControllerBase
 {
-    // Query 1 & 2 are grouped here conceptually to satisfy the criteria:
-    // "What is the average GPA per course?" and "Which students have zero enrollments?"
 
-    /// <summary>
-    /// Business Query 3: What is the average GPA per course?
-    /// Verification: Look for GROUP BY and the AVG aggregation function in your console log.
-    /// </summary>
+    [HttpGet("higher-gpa")]
+    public async Task<IActionResult> GetHigherGPA()
+    {
+        var count = await context.Students
+        .Where(s => s.IsActive && s.GPA >= 3.0m)
+        .CountAsync();
+        return Ok(count);
+    }
+    [HttpGet("most-enrollment")]
+    public async Task<IActionResult> GetMostEnrollment()
+    {
+        var list = await context.Courses
+.Select(c => new
+{
+    c.Title,
+    EnrollmentCount = c.Enrollments.Count
+})
+.OrderByDescending(x => x.EnrollmentCount)
+.ToListAsync();
+        return Ok(list);
+    }
+
     [HttpGet("average-gpa-per-course")]
     public async Task<IActionResult> GetAverageGpaPerCourse()
     {
@@ -30,10 +46,7 @@ public class RegistrarController(TmsDbContext context) : ControllerBase
         return Ok(list);
     }
 
-    /// <summary>
-    /// Business Query 4 (Approach A): Which students have zero enrollments using a Subquery?
-    /// Verification: Outputs a query utilizing NOT EXISTS (SELECT 1 FROM "Enrollments" ...).
-    /// </summary>
+
     [HttpGet("unenrolled-students-subquery")]
     public async Task<IActionResult> GetUnenrolledStudentsSubquery()
     {
@@ -45,10 +58,7 @@ public class RegistrarController(TmsDbContext context) : ControllerBase
         return Ok(list);
     }
 
-    /// <summary>
-    /// Business Query 4 (Approach B): Which students have zero enrollments using LeftJoin?
-    /// Verification: Outputs a explicit LEFT JOIN ... WHERE ... IS NULL layout.
-    /// </summary>
+
     [HttpGet("unenrolled-students-leftjoin")]
     public async Task<IActionResult> GetUnenrolledStudentsLeftJoin()
     {
@@ -62,5 +72,38 @@ public class RegistrarController(TmsDbContext context) : ControllerBase
            .ToListAsync();
 
         return Ok(list);
+    }
+    [HttpGet("students")]
+    public async Task<IActionResult> GetPaginatedStudents([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+    {
+        if (page < 1) page = 1;
+        if (pageSize < 1) pageSize = 20;
+
+        // Calculate the database-side offset
+        int skipCount = (page - 1) * pageSize;
+
+        var students = await context.Students
+            .OrderBy(s => s.Name) // Stable sort
+            .Skip(skipCount)      // Translated to OFFSET
+            .Take(pageSize)       // Translated to LIMIT
+            .ToListAsync();
+
+        return Ok(students);
+    }
+    [HttpGet("top-courses")]
+    public async Task<IActionResult> GetTopCourses()
+    {
+        var topCourses = await context.Enrollments
+            .GroupBy(e => e.Course.Title)
+            .Select(g => new
+            {
+                CourseTitle = g.Key,
+                EnrollmentCount = g.Count() // Database-side math
+            })
+            .OrderByDescending(c => c.EnrollmentCount)
+            .Take(5) // Top 5 records only
+            .ToListAsync();
+
+        return Ok(topCourses);
     }
 }
