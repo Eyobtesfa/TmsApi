@@ -46,4 +46,17 @@ public class TestController(TmsDbContext context) : ControllerBase
             return BadRequest(new { Message = ex.Message });
         }
     }
+    [HttpGet("client-side")]
+    public IActionResult TestClientSide()
+    {
+        Console.WriteLine("\n>>> STEP 1: Fetching ALL rows from the database via AsEnumerable()...");
+        var queryableDataset = context.Students.AsEnumerable();
+        Console.WriteLine(">>> STEP 2: Applying the un-translatable C# method in memory...");
+        var filteredResults = queryableDataset
+                .Where(s => IsHonorRoll(s.GPA))
+                .ToList();
+        Console.WriteLine(">>> STEP 3: In-memory filtering finished.\n");
+        return Ok(filteredResults);
+
+    }
 }
