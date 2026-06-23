@@ -154,4 +154,60 @@ public class RegistrarController(TmsDbContext context) : ControllerBase
         }
         return Ok(output);
     }
+
+
+    /// Exercise 8: Update Student Profile with Shadow Property Tracking
+
+    [HttpPut("students/{id:long}")]
+    public async Task<IActionResult> UpdateStudent(long id, [FromQuery] decimal newGpa, CancellationToken cancellationToken)
+    {
+
+        var student = await context.Students
+            .FirstOrDefaultAsync(s => s.Id == id, cancellationToken);
+
+        if (student == null)
+        {
+            return NotFound($"Student with ID {id} not found.");
+        }
+
+
+        student.GPA = newGpa;
+
+        context.Entry(student).Property("Last Updated").CurrentValue = DateTime.UtcNow;
+        await Task.Delay(10000);
+        try
+        {
+
+            await context.SaveChangesAsync(cancellationToken);
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+
+            return Conflict("Update failed. Another administrator has modified this student record concurrently.");
+        }
+
+        return Ok(new { Message = "Student updated successfully!", UpdatedGpa = student.GPA });
+    }
+    //EXERCISE 9 
+    [HttpPost("enrollments/archive")]
+    public async Task<IActionResult> ArchiveOldEnrollments([FromQuery] DateTime cutoffDate, CancellationToken cancellationToken)
+    {
+
+        int affectedRows = await context.Enrollments
+            .Where(e => e.EnrolledAt < cutoffDate && !e.IsArchived)
+            .ExecuteUpdateAsync(setters => setters.SetProperty(e => e.IsArchived, true), cancellationToken);
+
+        return Ok(new { Message = "Bulk archiving complete.", RowsArchived = affectedRows });
+    }
+    [HttpGet("students/deleted")]
+    public async Task<IActionResult> GetDeletedStudents(CancellationToken cancellationToken)
+    {
+        //BYPASS THE GLOBAL FILTER USING .IgnoreQueryFilters():
+        var deletedStudents = await context.Students
+            .IgnoreQueryFilters()
+            .Where(s => s.IsDeleted)
+            .ToListAsync(cancellationToken);
+
+        return Ok(deletedStudents);
+    }
 }

@@ -23,5 +23,7 @@ public class StudentConfiguration : IEntityTypeConfiguration<Student>
             .HasPrecision(3, 2);
         builder.Property(s => s.Version)
             .IsRowVersion();
+        builder.Property<DateTime>("Last Updated");
+        builder.HasQueryFilter(s => !s.IsDeleted);
     }
 }
