@@ -21,5 +21,7 @@ public class StudentConfiguration : IEntityTypeConfiguration<Student>
 
         builder.Property(s => s.GPA)
             .HasPrecision(3, 2);
+        builder.Property(s => s.Version)
+            .IsRowVersion();
     }
 }

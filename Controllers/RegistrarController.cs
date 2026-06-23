@@ -106,4 +106,52 @@ public class RegistrarController(TmsDbContext context) : ControllerBase
 
         return Ok(topCourses);
     }
+    //MODULE 5 SESSION 3  
+    [HttpGet("slow-report")]
+    public async Task<IActionResult> GetEnrollmentReportSlow(CancellationToken cancellationToken)
+    {
+        var students = await context.Students.AsNoTracking().ToListAsync(cancellationToken);
+        var output = new List<string>();
+        foreach (var s in students)
+        {
+            var count = await context.Enrollments
+                .AsNoTracking()
+                .CountAsync(e => e.StudentId == s.Id, cancellationToken);
+            Console.WriteLine($"{s.Name}: {count} enrollments");
+            output.Add($"{s.Name}: {count} enrollments");
+        }
+        return Ok(output);
+    }
+    [HttpGet("fast-report")]
+    public async Task<IActionResult> GetEnrollmentReportFast(CancellationToken cancellationToken)
+    {
+        var report = await context.Students
+            .AsNoTracking()
+            .Select(s => new
+            {
+                s.Name,
+                EnrollmentCount = s.Enrollments.Count
+            })
+            .ToListAsync(cancellationToken);
+        foreach (var r in report)
+            Console.WriteLine($"{r.Name}: {r.EnrollmentCount} enrollments");
+        var outputLines = report.Select(r => $"{r.Name}: {r.EnrollmentCount} enrollments");
+
+        return Ok(outputLines);
+    }
+    [HttpGet("alternative")]
+    public async Task<IActionResult> GetEnrollmentAlternative(CancellationToken cancellationToken)
+    {
+        var output = new List<string>();
+        var students = await context.Students
+            .AsNoTracking()
+            .Include(s => s.Enrollments)
+            .ToListAsync(cancellationToken);
+        foreach (var s in students)
+        {
+            Console.WriteLine($"{s.Name}: {s.Enrollments.Count} enrollments");
+            output.Add($"{s.Name}: {s.Enrollments.Count}");
+        }
+        return Ok(output);
+    }
 }
