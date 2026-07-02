@@ -35,6 +35,7 @@ options.UseNpgsql(builder.Configuration.GetConnectionString("TmsDatabase"))
     .ValidateDataAnnotations()
     .ValidateOnStart();*/
 builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<IEnrollmentServices, EnrollmentServices>();
 var app = builder.Build();
 
 
