@@ -50,20 +50,19 @@ var courses = new List<Course>
     new Course("C-02", "TypeScript")
 };
 */
+
+app.UseExceptionHandler();
+app.UseStatusCodePages();
+
 app.UseMiddleware<RequestLoggingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.MapScalarApiReference();
-    app.UseExceptionHandler();
-}
-else
-{
-    app.UseExceptionHandler();
+
 }
 
-app.UseStatusCodePages();
 
 app.UseHttpsRedirection();
 app.UseRouting();

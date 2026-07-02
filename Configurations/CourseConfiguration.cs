@@ -23,6 +23,6 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
 
         builder.HasMany(c => c.Enrollments)
             .WithOne(e => e.Course)
-            .HasForeignKey(e => e.CourseId);    
+            .HasForeignKey(e => e.CourseId);
     }
 }
