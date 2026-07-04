@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using TmsApi.Data;
 using TmsApi.Entities;
 using TmsApi.Services;
+//MODULE 6
+using TmsApi.Persistence;
+using TmsApi.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +39,14 @@ options.UseNpgsql(builder.Configuration.GetConnectionString("TmsDatabase"))
     .ValidateOnStart();*/
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IEnrollmentServices, EnrollmentServices>();
+
+
+//MODULE 6 
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<AuditLogFilter>();
+});
+
 var app = builder.Build();
 
 
@@ -178,6 +189,19 @@ using (var scope = app.Services.CreateScope())
         // 4. Final save to record the new relationship data
         context.SaveChanges();
     }
+}
+
+
+
+
+
+
+
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<TmsDbContext>();
+    await DataSeeder.SeedAsync(context);
 }
 app.Run();
 

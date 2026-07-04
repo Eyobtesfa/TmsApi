@@ -16,6 +16,16 @@ public class CourseController(ICourseService courseService) : ControllerBase
 
         return course is not null ? Ok(course) : NotFound();
     }
+
+
+    [HttpGet]
+    public async Task<IActionResult> GetCourses([FromQuery] PagedRequest request, CancellationToken ct)
+    {
+        var result = await courseService.GetCoursesAsync(request, ct);
+        return Ok(result);
+    }
+
+
     [HttpPost]
     public async Task<IActionResult> CreateCourse(CreateCourseRequest request, CancellationToken ct)
     {
