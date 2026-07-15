@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hp\\tms-fresh\\TmsApi.csproj": {}
+    "C:\\Users\\CSUG\\tms-fresh\\TmsApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hp\\tms-fresh\\TmsApi.csproj": {
+    "C:\\Users\\CSUG\\tms-fresh\\TmsApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\tms-fresh\\TmsApi.csproj",
+        "projectUniqueName": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.csproj",
         "projectName": "TmsApi",
-        "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\tms-fresh\\obj\\",
+        "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.csproj",
+        "packagesPath": "C:\\Users\\CSUG\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\CSUG\\tms-fresh\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\CSUG\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
