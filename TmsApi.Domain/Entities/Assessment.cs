@@ -1,6 +1,6 @@
 using System.Security.Cryptography.X509Certificates;
 
-namespace TmsApi.Entities;
+namespace TmsApi.Domain.Entities;
 
 public class Assessment
 {

@@ -1,6 +1,4 @@
-using TmsApi.Domain.Entities;
-
-namespace TmsApi.Entities;
+namespace TmsApi.Domain.Entities;
 
 public class Student
 {

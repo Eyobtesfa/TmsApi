@@ -1,6 +1,6 @@
 using System;
 
-namespace TmsApi.Entities;
+namespace TmsApi.Domain.Entities;
 
 public class Enrollment
 {

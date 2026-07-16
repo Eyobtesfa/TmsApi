@@ -2,6 +2,19 @@
   "version": 4,
   "targets": {
     "net10.0": {
+      "FluentValidation/12.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/FluentValidation.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/FluentValidation.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -363,11 +376,11 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore/10.0.9": {
+      "Microsoft.EntityFrameworkCore/10.0.10": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "10.0.9",
-          "Microsoft.EntityFrameworkCore.Analyzers": "10.0.9"
+          "Microsoft.EntityFrameworkCore.Abstractions": "10.0.10",
+          "Microsoft.EntityFrameworkCore.Analyzers": "10.0.10"
         },
         "compile": {
           "lib/net10.0/Microsoft.EntityFrameworkCore.dll": {
@@ -383,7 +396,7 @@
           "buildTransitive/net10.0/Microsoft.EntityFrameworkCore.props": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Abstractions/10.0.9": {
+      "Microsoft.EntityFrameworkCore.Abstractions/10.0.10": {
         "type": "package",
         "compile": {
           "lib/net10.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
@@ -396,7 +409,7 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/10.0.9": {
+      "Microsoft.EntityFrameworkCore.Analyzers/10.0.10": {
         "type": "package"
       },
       "Microsoft.EntityFrameworkCore.Design/10.0.9": {
@@ -426,10 +439,10 @@
           "build/net10.0/Microsoft.EntityFrameworkCore.Design.props": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Relational/10.0.9": {
+      "Microsoft.EntityFrameworkCore.Relational/10.0.10": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "10.0.9"
+          "Microsoft.EntityFrameworkCore": "10.0.10"
         },
         "compile": {
           "lib/net10.0/Microsoft.EntityFrameworkCore.Relational.dll": {
@@ -537,7 +550,7 @@
           }
         }
       },
-      "Npgsql.EntityFrameworkCore.PostgreSQL/10.0.2": {
+      "Npgsql.EntityFrameworkCore.PostgreSQL/10.0.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "[10.0.4, 11.0.0)",
@@ -701,6 +714,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
+          "FluentValidation": "12.1.1",
           "TmsApi.Domain": "1.0.0"
         },
         "compile": {
@@ -724,6 +738,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": "10.0.10",
+          "Microsoft.EntityFrameworkCore.Relational": "10.0.10",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.3",
           "TmsApi.Application": "1.0.0",
           "TmsApi.Domain": "1.0.0"
         },
@@ -737,6 +754,21 @@
     }
   },
   "libraries": {
+    "FluentValidation/12.1.1": {
+      "sha512": "EPpkIe1yh1a0OXyC100oOA8WMbZvqUu5plwhvYcb7oSELfyUZzfxV48BLhvs3kKo4NwG7MGLNgy1RJiYtT8Dpw==",
+      "type": "package",
+      "path": "fluentvalidation/12.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "fluent-validation-icon.png",
+        "fluentvalidation.12.1.1.nupkg.sha512",
+        "fluentvalidation.nuspec",
+        "lib/net8.0/FluentValidation.dll",
+        "lib/net8.0/FluentValidation.xml"
+      ]
+    },
     "Humanizer.Core/2.14.1": {
       "sha512": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "type": "package",
@@ -1854,10 +1886,10 @@
         "microsoft.codeanalysis.workspaces.msbuild.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore/10.0.9": {
-      "sha512": "tu85SRzOT021V7EQlViCiAE7TqldVn469Y6lt5TEn/+XC4/MeNCHgMRSxqYuWqvF4zAQZUhCmtNEZuM3ss4LeA==",
+    "Microsoft.EntityFrameworkCore/10.0.10": {
+      "sha512": "a0V7zj/VbYP6dTdWpUgE/r2PuLKtUGe2aJ0lVKkn/wP9ZhaxUz2kQydVfvOjCv2SKxlrqdBfHhPD4Cvlf+4ffA==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore/10.0.9",
+      "path": "microsoft.entityframeworkcore/10.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1866,14 +1898,14 @@
         "buildTransitive/net10.0/Microsoft.EntityFrameworkCore.props",
         "lib/net10.0/Microsoft.EntityFrameworkCore.dll",
         "lib/net10.0/Microsoft.EntityFrameworkCore.xml",
-        "microsoft.entityframeworkcore.10.0.9.nupkg.sha512",
+        "microsoft.entityframeworkcore.10.0.10.nupkg.sha512",
         "microsoft.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Abstractions/10.0.9": {
-      "sha512": "GRMaiPkqYna/gCsyDffYDWmefGPC3hDrdMw+2rrGcQwhs6uZOsaMQXMJnoXQ35tx9SkBV2ieRRU9N/jLOO6BZw==",
+    "Microsoft.EntityFrameworkCore.Abstractions/10.0.10": {
+      "sha512": "bOzrFCl6uZCjaSh2bG1ToRQRdx+iXvxosCg9hFyG9OWeAzOFI4xev9OqKeWfKf/kAHyox2JnbcvLVf2ceA7sqA==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.abstractions/10.0.9",
+      "path": "microsoft.entityframeworkcore.abstractions/10.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1881,21 +1913,21 @@
         "PACKAGE.md",
         "lib/net10.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
         "lib/net10.0/Microsoft.EntityFrameworkCore.Abstractions.xml",
-        "microsoft.entityframeworkcore.abstractions.10.0.9.nupkg.sha512",
+        "microsoft.entityframeworkcore.abstractions.10.0.10.nupkg.sha512",
         "microsoft.entityframeworkcore.abstractions.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/10.0.9": {
-      "sha512": "aiEFB+C5EsZGqxvMPazE07hbWsp4iPaufJpanGt5O+lrwv7mJLrqma5haVIgFAPCyhQkmk75XSCEubT1zUjxtA==",
+    "Microsoft.EntityFrameworkCore.Analyzers/10.0.10": {
+      "sha512": "2gLDordUCGf3aNOOuqtTbP5mxhiP9nk6TnvGiE3RnqT891O+Zf/qKu1PIREubs1M16A0SImr4vULBfU5BTDs1Q==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.analyzers/10.0.9",
+      "path": "microsoft.entityframeworkcore.analyzers/10.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll",
         "docs/PACKAGE.md",
-        "microsoft.entityframeworkcore.analyzers.10.0.9.nupkg.sha512",
+        "microsoft.entityframeworkcore.analyzers.10.0.10.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },
@@ -1915,10 +1947,10 @@
         "microsoft.entityframeworkcore.design.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Relational/10.0.9": {
-      "sha512": "dEoyYKgiaZHHgOFm1WMWm1sFEsEuhPWufX4L9PekKtqd/RaIcPjkCjvbrVvJtApErb5wPSJhYvnTlxhH+p9h2g==",
+    "Microsoft.EntityFrameworkCore.Relational/10.0.10": {
+      "sha512": "wNonj40aZxia+GtuBiiD6ZqVh4h6y5Nje1bGdmzZ8/ui0QRsAN+S0SIrLHFCEGbG9cDbeaE40sh+Lr7o9rRs6g==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.relational/10.0.9",
+      "path": "microsoft.entityframeworkcore.relational/10.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1926,7 +1958,7 @@
         "PACKAGE.md",
         "lib/net10.0/Microsoft.EntityFrameworkCore.Relational.dll",
         "lib/net10.0/Microsoft.EntityFrameworkCore.Relational.xml",
-        "microsoft.entityframeworkcore.relational.10.0.9.nupkg.sha512",
+        "microsoft.entityframeworkcore.relational.10.0.10.nupkg.sha512",
         "microsoft.entityframeworkcore.relational.nuspec"
       ]
     },
@@ -2089,17 +2121,17 @@
         "postgresql.png"
       ]
     },
-    "Npgsql.EntityFrameworkCore.PostgreSQL/10.0.2": {
-      "sha512": "PsNYgPOSW41Xx19gin7y4EdZAPteWr9Cb01XkdObxOsPzi+mgBupBEN7J7+erXFsROPOILM7MlIoO9QzL8+LGQ==",
+    "Npgsql.EntityFrameworkCore.PostgreSQL/10.0.3": {
+      "sha512": "IPGrrZnRkuW7OlHDhUESZz4G5DLkW7Nej/O3Cx+0iTsgyU5XJxBgpsvTHLloo3WWuAKKbDHXBvWPVkX1deRh1Q==",
       "type": "package",
-      "path": "npgsql.entityframeworkcore.postgresql/10.0.2",
+      "path": "npgsql.entityframeworkcore.postgresql/10.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
         "lib/net10.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll",
         "lib/net10.0/Npgsql.EntityFrameworkCore.PostgreSQL.xml",
-        "npgsql.entityframeworkcore.postgresql.10.0.2.nupkg.sha512",
+        "npgsql.entityframeworkcore.postgresql.10.0.3.nupkg.sha512",
         "npgsql.entityframeworkcore.postgresql.nuspec",
         "postgresql.png"
       ]
@@ -2330,7 +2362,6 @@
       "Microsoft.AspNetCore.OpenApi >= 10.0.9",
       "Microsoft.EntityFrameworkCore.Design >= 10.0.9",
       "Microsoft.EntityFrameworkCore.Tools >= 10.0.9",
-      "Npgsql.EntityFrameworkCore.PostgreSQL >= 10.0.2",
       "Scalar.AspNetCore >= 2.16.3",
       "TmsApi.Application >= 1.0.0",
       "TmsApi.Domain >= 1.0.0",
@@ -2338,31 +2369,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\CSUG\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\hp\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Api\\TmsApi.Api.csproj",
+      "projectUniqueName": "C:\\Users\\hp\\tms-fresh\\TmsApi.Api\\TmsApi.Api.csproj",
       "projectName": "TmsApi.Api",
-      "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Api\\TmsApi.Api.csproj",
-      "packagesPath": "C:\\Users\\CSUG\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Api\\obj\\",
+      "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Api\\TmsApi.Api.csproj",
+      "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Api\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\CSUG\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2370,14 +2394,14 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj": {
-              "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj"
+            "C:\\Users\\hp\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj": {
+              "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj"
             },
-            "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj": {
-              "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj"
+            "C:\\Users\\hp\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj": {
+              "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj"
             },
-            "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj"
+            "C:\\Users\\hp\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj"
             }
           }
         }
@@ -2414,10 +2438,6 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[10.0.9, )"
-          },
-          "Npgsql.EntityFrameworkCore.PostgreSQL": {
-            "target": "Package",
-            "version": "[10.0.2, )"
           },
           "Scalar.AspNetCore": {
             "target": "Package",
