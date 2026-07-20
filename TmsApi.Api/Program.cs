@@ -9,6 +9,7 @@ using TmsApi.Api.Filters;
 using TmsApi.Domain.Entities;
 //MODULE 7
 using Asp.Versioning;
+using TmsApi.Api.Middleware;
 
 
 
@@ -108,6 +109,7 @@ app.UseExceptionHandler();
 app.UseStatusCodePages();
 
 app.UseMiddleware<RequestLoggingMiddleware>();
+app.UseMiddleware<V1DeprecationMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
