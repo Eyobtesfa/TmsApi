@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hp\\tms-fresh\\TmsApi.Api\\TmsApi.Api.csproj": {}
+    "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Api\\TmsApi.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hp\\tms-fresh\\TmsApi.Api\\TmsApi.Api.csproj": {
+    "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Api\\TmsApi.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\tms-fresh\\TmsApi.Api\\TmsApi.Api.csproj",
+        "projectUniqueName": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Api\\TmsApi.Api.csproj",
         "projectName": "TmsApi.Api",
-        "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Api\\TmsApi.Api.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Api\\obj\\",
+        "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Api\\TmsApi.Api.csproj",
+        "packagesPath": "C:\\Users\\CSUG\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\CSUG\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -27,14 +27,14 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\hp\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj": {
-                "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj"
+              "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj": {
+                "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj"
               },
-              "C:\\Users\\hp\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj": {
-                "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj"
+              "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj": {
+                "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj"
               },
-              "C:\\Users\\hp\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj"
+              "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj"
               }
             }
           }
@@ -56,6 +56,14 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
+            "Asp.Versioning.Mvc": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
+            "Asp.Versioning.Mvc.ApiExplorer": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.9, )"
@@ -96,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
@@ -514,17 +522,17 @@
         }
       }
     },
-    "C:\\Users\\hp\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj": {
+    "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj",
+        "projectUniqueName": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj",
         "projectName": "TmsApi.Application",
-        "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Application\\obj\\",
+        "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj",
+        "packagesPath": "C:\\Users\\CSUG\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\CSUG\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -537,8 +545,8 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\hp\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj": {
-                "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj"
+              "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj": {
+                "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj"
               }
             }
           }
@@ -563,6 +571,14 @@
             "FluentValidation": {
               "target": "Package",
               "version": "[12.1.1, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[12.1.1, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[14.2.0, )"
             }
           },
           "imports": [
@@ -581,7 +597,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -859,17 +875,17 @@
         }
       }
     },
-    "C:\\Users\\hp\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj": {
+    "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj",
         "projectName": "TmsApi.Domain",
-        "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Domain\\obj\\",
+        "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj",
+        "packagesPath": "C:\\Users\\CSUG\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\CSUG\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -916,7 +932,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -1194,17 +1210,17 @@
         }
       }
     },
-    "C:\\Users\\hp\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj": {
+    "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj",
         "projectName": "TmsApi.Infrastructure",
-        "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\CSUG\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\CSUG\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -1217,11 +1233,11 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\hp\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj": {
-                "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj"
+              "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj": {
+                "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Application\\TmsApi.Application.csproj"
               },
-              "C:\\Users\\hp\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj": {
-                "projectPath": "C:\\Users\\hp\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj"
+              "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj": {
+                "projectPath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Domain\\TmsApi.Domain.csproj"
               }
             }
           }
@@ -1278,7 +1294,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

@@ -7,6 +7,10 @@ using TmsApi.Application.Interfaces;
 using TmsApi.Infrastructure.Persistence;
 using TmsApi.Api.Filters;
 using TmsApi.Domain.Entities;
+//MODULE 7
+using Asp.Versioning;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +50,44 @@ builder.Services.AddControllers(options =>
     options.Filters.Add<AuditLogFilter>();
 });
 
+
+
+//MODULE 7
+
+builder.Services.AddOpenApi("v1", options =>
+{
+    options.ShouldInclude = description =>
+    description.GroupName == "v1";
+
+});
+
+builder.Services.AddOpenApi("v2", options =>
+{
+    options.ShouldInclude = description =>
+    description.GroupName == "v2";
+});
+
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion  = new ApiVersion(1,0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;
+    options.ApiVersionReader = new UrlSegmentApiVersionReader();
+})
+.AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
+});
+
+
+
+
+
+
+
+
+
 var app = builder.Build();
 
 
@@ -70,7 +112,15 @@ app.UseMiddleware<RequestLoggingMiddleware>();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.MapScalarApiReference();
+    app.MapScalarApiReference(options =>
+    {
+        options.WithTitle("TMS API Reference")
+        .WithTheme(ScalarTheme.DeepSpace)
+        .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
+
+        options.AddDocument("v1", "API Version 1.0")
+        .AddDocument("v2", "API Version");
+    });
 
 }
 
