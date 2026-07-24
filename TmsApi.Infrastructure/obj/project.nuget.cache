@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6mLfAyfAUhw=",
+  "dgSpecHash": "mhL/7geDlUE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\CSUG\\tms-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\CSUG\\tmsApi-fresh\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\CSUG\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512",
     "C:\\Users\\CSUG\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\12.1.1\\fluentvalidation.dependencyinjectionextensions.12.1.1.nupkg.sha512",

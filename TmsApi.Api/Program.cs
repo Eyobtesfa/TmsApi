@@ -10,6 +10,11 @@ using TmsApi.Domain.Entities;
 //MODULE 7
 using Asp.Versioning;
 using TmsApi.Api.Middleware;
+using TmsApi.Application.Enrollments.Commands;
+using FluentValidation;
+using MediatR;
+using TmsApi.Application.Behaviors;
+using TmsApi.Api.ExceptionHandlers;
 
 
 
@@ -86,6 +91,15 @@ builder.Services.AddApiVersioning(options =>
 });
 
 
+builder.Services.AddMediatR(cfg =>
+cfg.RegisterServicesFromAssembly(typeof(EnrollStudentHandler).Assembly));
+builder.Services.AddValidatorsFromAssembly(typeof(EnrollStudentValidator).Assembly);
+
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 
 
