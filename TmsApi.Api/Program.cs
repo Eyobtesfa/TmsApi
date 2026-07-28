@@ -15,6 +15,8 @@ using FluentValidation;
 using MediatR;
 using TmsApi.Application.Behaviors;
 using TmsApi.Api.ExceptionHandlers;
+using Microsoft.Extensions.Caching.Hybrid;
+using TmsApi.Infrastructure.Services;
 
 
 
@@ -75,14 +77,14 @@ builder.Services.AddOpenApi("v2", options =>
 
 builder.Services.AddApiVersioning(options =>
 {
-    options.DefaultApiVersion  = new ApiVersion(1,0);
+    options.DefaultApiVersion = new ApiVersion(1, 0);
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.ReportApiVersions = true;
     options.ApiVersionReader = ApiVersionReader.Combine(
         new UrlSegmentApiVersionReader(),
         new HeaderApiVersionReader("X-Api-Version")
     );
-    
+
 })
 .AddApiExplorer(options =>
 {
@@ -102,7 +104,18 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
 
+//MODULE 7 SESSION 2
 
+builder.Services.AddHybridCache(options =>
+{
+    options.DefaultEntryOptions = new HybridCacheEntryOptions
+    {
+        Expiration = TimeSpan.FromMinutes(10),
+        LocalCacheExpiration = TimeSpan.FromMinutes(2)
+    };
+});
+
+builder.Services.AddScoped<ICachedCourseService, CachedCourseService>();
 
 
 
