@@ -2811,11 +2811,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\hp\\TMAAPI\\TmsApi.Api\\TmsApi.Api.csproj",
+      "projectUniqueName": "C:\\Users\\hp\\TMAAPI\\TmsApi.Api\\TmsApi.Api.csproj",
       "projectName": "TmsApi.Api",
-      "projectPath": "c:\\Users\\hp\\TMAAPI\\TmsApi.Api\\TmsApi.Api.csproj",
+      "projectPath": "C:\\Users\\hp\\TMAAPI\\TmsApi.Api\\TmsApi.Api.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\hp\\TMAAPI\\TmsApi.Api\\obj\\",
+      "outputPath": "C:\\Users\\hp\\TMAAPI\\TmsApi.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -2831,14 +2831,14 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "c:\\Users\\hp\\TMAAPI\\TmsApi.Application\\TmsApi.Application.csproj": {
-              "projectPath": "c:\\Users\\hp\\TMAAPI\\TmsApi.Application\\TmsApi.Application.csproj"
+            "C:\\Users\\hp\\TMAAPI\\TmsApi.Application\\TmsApi.Application.csproj": {
+              "projectPath": "C:\\Users\\hp\\TMAAPI\\TmsApi.Application\\TmsApi.Application.csproj"
             },
             "C:\\Users\\hp\\TMAAPI\\TmsApi.Domain\\TmsApi.Domain.csproj": {
               "projectPath": "C:\\Users\\hp\\TMAAPI\\TmsApi.Domain\\TmsApi.Domain.csproj"
             },
-            "c:\\Users\\hp\\TMAAPI\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj": {
-              "projectPath": "c:\\Users\\hp\\TMAAPI\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj"
+            "C:\\Users\\hp\\TMAAPI\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\hp\\TMAAPI\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj"
             }
           }
         }

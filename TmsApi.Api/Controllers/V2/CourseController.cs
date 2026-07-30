@@ -17,7 +17,7 @@ public class CourseController(TmsDbContext context) : ControllerBase
         CancellationToken ct = default
     )
     {
-        page = Math.Max(1 , page);
+        page = Math.Max(1, page);
         pageSize = Math.Clamp(pageSize, 1, 50);
 
         var baseQuery = context.Courses.AsNoTracking();
@@ -64,4 +64,13 @@ public class CourseController(TmsDbContext context) : ControllerBase
 
 
     }
+
+    /* [HttpGet("search")]
+     [EnableRateLimiting("search")]
+     public async Task<IActionResult> SearchCourses(
+     [FromQuery] string? term, CancellationToken ct)
+     {
+     var results = await mediator.Send(new SearchCoursesQuery(term), ct);
+     return Ok(results);
+     }*/
 }
