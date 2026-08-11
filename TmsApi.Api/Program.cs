@@ -20,6 +20,7 @@ using TmsApi.Infrastructure.Services;
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.RateLimiting;
 using TmsApi.Api.RateLimiting;
+using Microsoft.AspNetCore.Cors;
 
 
 
@@ -199,6 +200,17 @@ builder.Services.AddRateLimiter(options =>
 
 });
 
+//MODULE 8
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
 
 
 
@@ -243,8 +255,13 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseRateLimiter();
-app.MapHealthChecks("/health/live").DisableRateLimiting();
-app.MapHealthChecks("/health/ready").DisableRateLimiting();
+//app.MapHealthChecks("/health/live").DisableRateLimiting();
+//app.MapHealthChecks("/health/ready").DisableRateLimiting();
+
+
+//module 8
+
+app.UseCors("AllowAngular");
 
 app.UseAuthentication();
 app.UseAuthorization();
