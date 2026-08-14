@@ -2,19 +2,29 @@ using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using TmsApi.Application.Enrollments.Commands;
 using TmsApi.Application.Enrollments.Queries;
+using TmsApi.Application.Hubs;
 
 namespace TmsApi.Api.Controllers;
 
 [ApiController]
 [ApiVersion("2.0")]
 [Route("api/v{version:apiVersion}/enrollments")]
-public class EnrollmentsController(ISender mediator) : ControllerBase
+public class EnrollmentsController(ISender mediator,
+IHubContext<TmsHub, ITmsHubClient> hubContext) : ControllerBase
 {
+    [HttpPost("{id}/approve")]
+    public async Task<IActionResult> Approve(string id, CancellationToken ct)
+    {
+        await hubContext.Clients.All.ReceiveEnrollmentStatusUpdated(id, "Approved");
+
+        return NoContent();
+    }
     [HttpPost]
     public async Task<IActionResult> Enroll(
-        [FromBody] EnrollStudentCommand command, 
+        [FromBody] EnrollStudentCommand command,
         CancellationToken ct)
     {
         var result = await mediator.Send(command, ct);
@@ -43,7 +53,7 @@ public class EnrollmentsController(ISender mediator) : ControllerBase
 
     [HttpGet("{studentId:int}/schedule")]
     public async Task<IActionResult> GetSchedule(
-        int studentId, 
+        int studentId,
         CancellationToken ct)
     {
         var schedule = await mediator.Send(

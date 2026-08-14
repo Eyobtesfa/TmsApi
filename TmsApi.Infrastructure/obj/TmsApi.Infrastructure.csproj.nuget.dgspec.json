@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hp\\TMAAPI\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj": {}
+    "c:\\Users\\hp\\tnssi\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hp\\TMAAPI\\TmsApi.Application\\TmsApi.Application.csproj": {
+    "c:\\Users\\hp\\tnssi\\TmsApi.Application\\TmsApi.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\TMAAPI\\TmsApi.Application\\TmsApi.Application.csproj",
+        "projectUniqueName": "c:\\Users\\hp\\tnssi\\TmsApi.Application\\TmsApi.Application.csproj",
         "projectName": "TmsApi.Application",
-        "projectPath": "C:\\Users\\hp\\TMAAPI\\TmsApi.Application\\TmsApi.Application.csproj",
+        "projectPath": "c:\\Users\\hp\\tnssi\\TmsApi.Application\\TmsApi.Application.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\TMAAPI\\TmsApi.Application\\obj\\",
+        "outputPath": "c:\\Users\\hp\\tnssi\\TmsApi.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -27,8 +27,8 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\hp\\TMAAPI\\TmsApi.Domain\\TmsApi.Domain.csproj": {
-                "projectPath": "C:\\Users\\hp\\TMAAPI\\TmsApi.Domain\\TmsApi.Domain.csproj"
+              "c:\\Users\\hp\\tnssi\\TmsApi.Domain\\TmsApi.Domain.csproj": {
+                "projectPath": "c:\\Users\\hp\\tnssi\\TmsApi.Domain\\TmsApi.Domain.csproj"
               }
             }
           }
@@ -79,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -357,14 +357,14 @@
         }
       }
     },
-    "C:\\Users\\hp\\TMAAPI\\TmsApi.Domain\\TmsApi.Domain.csproj": {
+    "c:\\Users\\hp\\tnssi\\TmsApi.Domain\\TmsApi.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\TMAAPI\\TmsApi.Domain\\TmsApi.Domain.csproj",
+        "projectUniqueName": "c:\\Users\\hp\\tnssi\\TmsApi.Domain\\TmsApi.Domain.csproj",
         "projectName": "TmsApi.Domain",
-        "projectPath": "C:\\Users\\hp\\TMAAPI\\TmsApi.Domain\\TmsApi.Domain.csproj",
+        "projectPath": "c:\\Users\\hp\\tnssi\\TmsApi.Domain\\TmsApi.Domain.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\TMAAPI\\TmsApi.Domain\\obj\\",
+        "outputPath": "c:\\Users\\hp\\tnssi\\TmsApi.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -414,7 +414,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -692,14 +692,14 @@
         }
       }
     },
-    "C:\\Users\\hp\\TMAAPI\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj": {
+    "c:\\Users\\hp\\tnssi\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\TMAAPI\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj",
+        "projectUniqueName": "c:\\Users\\hp\\tnssi\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj",
         "projectName": "TmsApi.Infrastructure",
-        "projectPath": "C:\\Users\\hp\\TMAAPI\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj",
+        "projectPath": "c:\\Users\\hp\\tnssi\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\TMAAPI\\TmsApi.Infrastructure\\obj\\",
+        "outputPath": "c:\\Users\\hp\\tnssi\\TmsApi.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -715,11 +715,11 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\hp\\TMAAPI\\TmsApi.Application\\TmsApi.Application.csproj": {
-                "projectPath": "C:\\Users\\hp\\TMAAPI\\TmsApi.Application\\TmsApi.Application.csproj"
+              "c:\\Users\\hp\\tnssi\\TmsApi.Application\\TmsApi.Application.csproj": {
+                "projectPath": "c:\\Users\\hp\\tnssi\\TmsApi.Application\\TmsApi.Application.csproj"
               },
-              "C:\\Users\\hp\\TMAAPI\\TmsApi.Domain\\TmsApi.Domain.csproj": {
-                "projectPath": "C:\\Users\\hp\\TMAAPI\\TmsApi.Domain\\TmsApi.Domain.csproj"
+              "c:\\Users\\hp\\tnssi\\TmsApi.Domain\\TmsApi.Domain.csproj": {
+                "projectPath": "c:\\Users\\hp\\tnssi\\TmsApi.Domain\\TmsApi.Domain.csproj"
               }
             }
           }
@@ -776,7 +776,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
