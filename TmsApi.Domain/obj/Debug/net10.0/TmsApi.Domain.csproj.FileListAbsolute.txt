@@ -46,3 +46,15 @@ C:\Users\hp\TMAAPI\TmsApi.Domain\obj\Debug\net10.0\TmsApi.Domain.dll
 C:\Users\hp\TMAAPI\TmsApi.Domain\obj\Debug\net10.0\refint\TmsApi.Domain.dll
 C:\Users\hp\TMAAPI\TmsApi.Domain\obj\Debug\net10.0\TmsApi.Domain.pdb
 C:\Users\hp\TMAAPI\TmsApi.Domain\obj\Debug\net10.0\ref\TmsApi.Domain.dll
+C:\Users\CSUG\tmsmain\TmsApi.Domain\bin\Debug\net10.0\TmsApi.Domain.deps.json
+C:\Users\CSUG\tmsmain\TmsApi.Domain\bin\Debug\net10.0\TmsApi.Domain.dll
+C:\Users\CSUG\tmsmain\TmsApi.Domain\bin\Debug\net10.0\TmsApi.Domain.pdb
+C:\Users\CSUG\tmsmain\TmsApi.Domain\obj\Debug\net10.0\TmsApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\CSUG\tmsmain\TmsApi.Domain\obj\Debug\net10.0\TmsApi.Domain.AssemblyInfoInputs.cache
+C:\Users\CSUG\tmsmain\TmsApi.Domain\obj\Debug\net10.0\TmsApi.Domain.AssemblyInfo.cs
+C:\Users\CSUG\tmsmain\TmsApi.Domain\obj\Debug\net10.0\TmsApi.Domain.csproj.CoreCompileInputs.cache
+C:\Users\CSUG\tmsmain\TmsApi.Domain\obj\Debug\net10.0\TmsApi.Domain.sourcelink.json
+C:\Users\CSUG\tmsmain\TmsApi.Domain\obj\Debug\net10.0\TmsApi.Domain.dll
+C:\Users\CSUG\tmsmain\TmsApi.Domain\obj\Debug\net10.0\refint\TmsApi.Domain.dll
+C:\Users\CSUG\tmsmain\TmsApi.Domain\obj\Debug\net10.0\TmsApi.Domain.pdb
+C:\Users\CSUG\tmsmain\TmsApi.Domain\obj\Debug\net10.0\ref\TmsApi.Domain.dll

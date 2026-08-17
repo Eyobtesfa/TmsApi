@@ -21,6 +21,12 @@ using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.RateLimiting;
 using TmsApi.Api.RateLimiting;
 using Microsoft.AspNetCore.Cors;
+using System.Threading.Channels;
+using TmsApi.Application.Transcripts;
+using TmsApi.Infrastructure.Workers;
+
+using TmsApi.Application.Hubs;
+using TmsApi.Infrastructure.Transcripts;
 
 
 
@@ -200,22 +206,28 @@ builder.Services.AddRateLimiter(options =>
 
 });
 
+//MODULE 7-3
+
+builder.Services.AddSingleton<ITranscriptStatusStore, InMemoryTranscriptStatusStore>();
+    builder.Services.AddSingleton(Channel.CreateBounded<TranscriptRequest>(
+        new BoundedChannelOptions(100)
+        {
+            FullMode = BoundedChannelFullMode.Wait
+        }
+    ));
+
+builder.Services.AddHostedService<TranscriptWorker>();
+
+builder.Services.AddSignalR(); 
 //MODULE 8
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAngular", policy =>
-    {
-        policy.WithOrigins("http://localhost:4200")
-        .AllowAnyHeader()
-        .AllowAnyMethod();
-    });
-});
+
 
 
 
 var app = builder.Build();
 
+app.MapHub<TmsHub>("/hubs/tms"); 
 
 /*var students = new List<Student>{
     new Student("S-001", "Abeba"),
@@ -261,7 +273,7 @@ app.UseRateLimiter();
 
 //module 8
 
-app.UseCors("AllowAngular");
+
 
 app.UseAuthentication();
 app.UseAuthorization();

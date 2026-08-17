@@ -911,7 +911,10 @@
         },
         "runtime": {
           "bin/placeholder/TmsApi.Application.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "TmsApi.Domain/1.0.0": {
         "type": "project",
@@ -938,7 +941,10 @@
         },
         "runtime": {
           "bin/placeholder/TmsApi.Infrastructure.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -2806,24 +2812,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hp\\.nuget\\packages\\": {}
+    "C:\\Users\\CSUG\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\hp\\tnssi\\TmsApi.Api\\TmsApi.Api.csproj",
+      "projectUniqueName": "C:\\Users\\CSUG\\tmsmain\\TmsApi.Api\\TmsApi.Api.csproj",
       "projectName": "TmsApi.Api",
-      "projectPath": "c:\\Users\\hp\\tnssi\\TmsApi.Api\\TmsApi.Api.csproj",
-      "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\hp\\tnssi\\TmsApi.Api\\obj\\",
+      "projectPath": "C:\\Users\\CSUG\\tmsmain\\TmsApi.Api\\TmsApi.Api.csproj",
+      "packagesPath": "C:\\Users\\CSUG\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\CSUG\\tmsmain\\TmsApi.Api\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\CSUG\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2831,14 +2844,14 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "c:\\Users\\hp\\tnssi\\TmsApi.Application\\TmsApi.Application.csproj": {
-              "projectPath": "c:\\Users\\hp\\tnssi\\TmsApi.Application\\TmsApi.Application.csproj"
+            "C:\\Users\\CSUG\\tmsmain\\TmsApi.Application\\TmsApi.Application.csproj": {
+              "projectPath": "C:\\Users\\CSUG\\tmsmain\\TmsApi.Application\\TmsApi.Application.csproj"
             },
-            "c:\\Users\\hp\\tnssi\\TmsApi.Domain\\TmsApi.Domain.csproj": {
-              "projectPath": "c:\\Users\\hp\\tnssi\\TmsApi.Domain\\TmsApi.Domain.csproj"
+            "C:\\Users\\CSUG\\tmsmain\\TmsApi.Domain\\TmsApi.Domain.csproj": {
+              "projectPath": "C:\\Users\\CSUG\\tmsmain\\TmsApi.Domain\\TmsApi.Domain.csproj"
             },
-            "c:\\Users\\hp\\tnssi\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj": {
-              "projectPath": "c:\\Users\\hp\\tnssi\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj"
+            "C:\\Users\\CSUG\\tmsmain\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\CSUG\\tmsmain\\TmsApi.Infrastructure\\TmsApi.Infrastructure.csproj"
             }
           }
         }
@@ -2916,7 +2929,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
