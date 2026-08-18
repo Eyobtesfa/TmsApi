@@ -103,6 +103,13 @@ public class CourseService(TmsDbContext context, ILogger<CourseService> logger) 
         await context.SaveChangesAsync(ct);
         return true;
     }
+    // CourseService.cs
+    public Task<List<CourseResponseDto>> GetAllAsync(CancellationToken ct) =>
+    context.Courses
+        .AsNoTracking()
+        .Select(c => new CourseResponseDto(
+            c.Id, c.Code, c.Title, c.MaxCapacity, c.Enrollments.Count))
+        .ToListAsync(ct);
 
 
 }

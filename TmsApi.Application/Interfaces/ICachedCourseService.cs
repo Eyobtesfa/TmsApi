@@ -5,7 +5,8 @@ namespace TmsApi.Application.Interfaces;
 
 public interface ICachedCourseService
 {
-    Task<CourseDetailDto> GetCourseAsync(string code, CancellationToken ct);
-    Task<List<CourseDetailDto>> GetAllCoursesAsync(CancellationToken ct);
+    Task<CourseDto?> GetCourseAsync(string code, CancellationToken ct);
+    Task<List<CourseDto>> GetAllCoursesAsync(CancellationToken ct);
     Task InvalidateCourseCacheAsync(CancellationToken ct);
+    Task<PagedResponse<CourseDto>> GetCoursesAsync(PagedRequest request, CancellationToken ct);
 }

@@ -8,3 +8,4 @@ public record CourseResponseDto(
     int MaxCapacity,
     int EnrollmentCount
 );
+

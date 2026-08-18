@@ -11,7 +11,7 @@ public class CachedCourseService(
     ICourseService service,
     ILogger<CachedCourseService> logger) : ICachedCourseService
 {
-    public async Task<CourseDetailDto> GetCourseAsync(string code, CancellationToken ct)
+    public async Task<CourseDto?> GetCourseAsync(string code, CancellationToken ct)
     {
         var key = CacheKeys.Course(code);
         var dbHit = false;
@@ -23,29 +23,34 @@ public class CachedCourseService(
             {
                 dbHit = true;
                 logger.LogInformation("Cache MISS for {Key} fetching from DB", key);
-                var course = await state.service.GetByCodeAsync(state.code, token)
-                             ?? throw new KeyNotFoundException($"Course {state.code} not found.");
+                var course = await state.service.GetByCodeAsync(state.code, token);
 
-                return new CourseDetailDto
-                {
-                    Id = course.Id,
-                    Code = course.Code,
-                    Title = course.Title,
-                    MaxCapacity = course.MaxCapacity,
-                    EnrollmentCount = course.EnrollmentCount,
-                    Links = new List<LinkDto>()
-                };
+
+                return course is null
+                    ? null
+                    : new CourseDto
+                    (
+                        course.Id,
+                        course.Code,
+                        course.Title,
+                        course.MaxCapacity,
+                        course.EnrollmentCount
+
+                    );
             },
             tags: [CacheKeys.CoursesTag],
             cancellationToken: ct);
 
-        if (!dbHit)
-            logger.LogInformation("Cache HIT for {Key}", key);
+        if (dbHit)
+            TmsMeters.CacheMisses.Add(1, new KeyValuePair<string, object?>("key.kind", "course"));
+        else
+            TmsMeters.CacheHits.Add(1, new KeyValuePair<string, object?>("key.kind", "course"));
 
         return dto;
     }
 
-    public async Task<List<CourseDetailDto>> GetAllCoursesAsync(CancellationToken ct)
+    // CachedCourseService.GetAllCoursesAsync
+    public async Task<List<CourseDto>> GetAllCoursesAsync(CancellationToken ct)
     {
         var key = CacheKeys.CoursesAll;
         var dbHit = false;
@@ -58,20 +63,10 @@ public class CachedCourseService(
                 dbHit = true;
                 logger.LogInformation("Cache MISS for {Key} fetching from DB", key);
 
-                var pagedRequest = new PagedRequest { Page = 1, PageSize = 100 };
-
-
-                var pagedResponse = await state.GetCoursesAsync(pagedRequest, token);
-
-                return pagedResponse.Items.Select(c => new CourseDetailDto
-                {
-                    Id = c.Id,
-                    Code = c.Code,
-                    Title = c.Title,
-                    MaxCapacity = c.MaxCapacity,
-                    EnrollmentCount = c.EnrollmentCount,
-                    Links = new List<LinkDto>()
-                }).ToList();
+                var courses = await state.GetAllAsync(token);
+                return courses.Select(c => new CourseDto(
+                    c.Id, c.Code, c.Title,
+                    c.MaxCapacity, c.EnrollmentCount)).ToList();
             },
             tags: [CacheKeys.CoursesTag],
             cancellationToken: ct);
@@ -80,6 +75,42 @@ public class CachedCourseService(
             logger.LogInformation("Cache HIT for {Key}", key);
 
         return list;
+    }
+
+    public async Task<PagedResponse<CourseDto>> GetCoursesAsync(PagedRequest request, CancellationToken ct)
+    {
+        var key = CacheKeys.Courses(request.Page, request.PageSize, request.Search, request.OrderBy, request.Descending);
+        var dbHit = false;
+
+        var result = await cache.GetOrCreateAsync(
+            key,
+            (service, request),
+            async (state, token) =>
+            {
+                dbHit = true;
+                logger.LogInformation("Cache MISS for {Key} fetching from DB", key);
+
+                var paged = await state.service.GetCoursesAsync(state.request, token);
+
+                var items = paged.Items
+                    .Select(c => new CourseDto(c.Id, c.Code, c.Title, c.MaxCapacity, c.EnrollmentCount))
+                    .ToList();
+
+                return new PagedResponse<CourseDto>
+                {
+                    Items = items,
+                    TotalCount = paged.TotalCount,
+                    Page = paged.Page,
+                    PageSize = paged.PageSize
+                };
+            },
+            tags: [CacheKeys.CoursesTag],
+            cancellationToken: ct);
+
+        if (!dbHit)
+            logger.LogInformation("Cache HIT for {Key}", key);
+
+        return result;
     }
     public async Task InvalidateCourseCacheAsync(CancellationToken ct)
     {

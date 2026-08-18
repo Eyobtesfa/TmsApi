@@ -28,9 +28,24 @@ using TmsApi.Infrastructure.Workers;
 using TmsApi.Application.Hubs;
 using TmsApi.Infrastructure.Transcripts;
 
+using Polly;
+using Polly.CircuitBreaker;
+using Polly.Retry;
+using Polly.Timeout;
+using TmsApi.Infrastructure.ExternalServices;
 
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using HealthChecks.NpgSql;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using OpenTelemetry.Instrumentation.Runtime;
 
 var builder = WebApplication.CreateBuilder(args);
+
+const string ServiceName = "tms-api";
 
 builder.Services.AddAuthentication("Training")
     .AddScheme<AuthenticationSchemeOptions, TrainingAuthHandler>("Training", null);
@@ -209,16 +224,111 @@ builder.Services.AddRateLimiter(options =>
 //MODULE 7-3
 
 builder.Services.AddSingleton<ITranscriptStatusStore, InMemoryTranscriptStatusStore>();
-    builder.Services.AddSingleton(Channel.CreateBounded<TranscriptRequest>(
-        new BoundedChannelOptions(100)
-        {
-            FullMode = BoundedChannelFullMode.Wait
-        }
-    ));
+builder.Services.AddSingleton(Channel.CreateBounded<TranscriptRequest>(
+    new BoundedChannelOptions(100)
+    {
+        FullMode = BoundedChannelFullMode.Wait
+    }
+));
 
 builder.Services.AddHostedService<TranscriptWorker>();
 
-builder.Services.AddSignalR(); 
+
+//MODULE 7-4
+
+builder.Services.AddResiliencePipeline("certificate-api", pipeline =>
+{
+    pipeline
+        // Outer: per-request hard timeout  protects against hangs 
+        .AddTimeout(TimeSpan.FromSeconds(5))
+        // Middle: circuit breaker  protects against sustained outage 
+        .AddCircuitBreaker(new CircuitBreakerStrategyOptions
+        {
+            FailureRatio = 0.5,
+            MinimumThroughput = 10,
+            SamplingDuration = TimeSpan.FromSeconds(30),
+            BreakDuration = TimeSpan.FromSeconds(15),
+            ShouldHandle = new PredicateBuilder()
+                .Handle<HttpRequestException>()
+                .Handle<TimeoutRejectedException>(),
+            OnOpened = args =>
+            {
+                Console.WriteLine("Circuit OPENED  stopping requests to certificate service");
+                return ValueTask.CompletedTask;
+            },
+            OnClosed = args =>
+            {
+                Console.WriteLine("Circuit CLOSED  certificate service recovered");
+                return ValueTask.CompletedTask;
+            }
+        })
+        // Inner: retry with jitter  only for transient failures 
+        .AddRetry(new RetryStrategyOptions
+        {
+            MaxRetryAttempts = 3,
+            Delay = TimeSpan.FromMilliseconds(500),
+            BackoffType = DelayBackoffType.Exponential,
+            UseJitter = true,
+            ShouldHandle = new PredicateBuilder()
+                .Handle<HttpRequestException>()
+                .Handle<TimeoutRejectedException>(),
+            OnRetry = args =>
+            {
+                Console.WriteLine(
+                    $"Retry #{args.AttemptNumber} after {args.RetryDelay.TotalMilliseconds:F0}ms ({args.Outcome.Exception?.GetType().Name})");
+                return ValueTask.CompletedTask;
+            }
+        });
+});
+
+builder.Services.AddHttpClient<ICertificateService, CertificateService>((sp,
+client) =>
+{
+    var baseUrl = sp.GetRequiredService<IConfiguration>().GetValue<string>("TmsApi:PublicBaseUrl")
+        ?? "https://localhost:5294";
+    client.BaseAddress = new Uri(baseUrl);
+});
+
+builder.Services.AddHttpClient("SmsService", client =>
+{
+    client.BaseAddress = new Uri("https://sms.tms.internal");
+})
+.AddStandardResilienceHandler();
+
+
+builder.Services.AddHealthChecks()
+.AddCheck("self", () => HealthCheckResult.Healthy("alive"),
+tags: ["live"])
+.AddNpgSql(
+connectionString: builder.Configuration.GetConnectionString("Tms")!,
+name: "postgres",
+tags: ["ready"]);
+
+builder.Logging.AddJsonConsole(options =>
+{
+    options.IncludeScopes = true;
+    options.JsonWriterOptions = new() { Indented = false };
+});
+
+
+
+
+builder.Services.AddOpenTelemetry()
+.ConfigureResource(r => r.AddService(serviceName: ServiceName,
+serviceVersion: "1.0.0"))
+.WithTracing(t => t
+        .AddSource(ServiceName)
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddOtlpExporter())
+    .WithMetrics(m => m
+        .AddMeter(ServiceName)
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddRuntimeInstrumentation()
+        .AddOtlpExporter());
+
+builder.Services.AddSignalR();
 //MODULE 8
 
 
@@ -227,7 +337,16 @@ builder.Services.AddSignalR();
 
 var app = builder.Build();
 
-app.MapHub<TmsHub>("/hubs/tms"); 
+app.MapHealthChecks("/health/live", new HealthCheckOptions
+{
+    Predicate = check => check.Tags.Contains("live")
+}).DisableRateLimiting();
+app.MapHealthChecks("/health/ready", new HealthCheckOptions
+{
+    Predicate = check => check.Tags.Contains("ready")
+}).DisableRateLimiting();
+
+app.MapHub<TmsHub>("/hubs/tms");
 
 /*var students = new List<Student>{
     new Student("S-001", "Abeba"),
@@ -399,6 +518,27 @@ if (app.Environment.IsDevelopment())
     var context = scope.ServiceProvider.GetRequiredService<TmsDbContext>();
     await DataSeeder.SeedAsync(context);
 }
+
+var attempts = 0;
+app.MapPost("/fake/certificates", async () =>
+{
+    var n = Interlocked.Increment(ref attempts);
+    if (n % 7 == 0)
+    {
+        await Task.Delay(TimeSpan.FromSeconds(20));
+        return Results.Ok(new { Status = "issued", Attempt = n });
+    }
+    if (n % 3 != 0)
+    {
+        return Results.StatusCode(StatusCodes.Status503ServiceUnavailable);
+    }
+    if (n % 11 == 0)
+    {
+        return Results.BadRequest(new { error = "validation_failed" });
+    }
+    return Results.Ok(new { Status = "issued", Attempt = n });
+}).WithTags("lab-fixtures");
+
 app.Run();
 
 //public record Student(string Id, string Name);

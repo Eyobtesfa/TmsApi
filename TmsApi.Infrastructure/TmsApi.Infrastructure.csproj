@@ -12,8 +12,11 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Resilience" Version="10.9.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Polly" Version="8.7.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="10.0.11" />
   </ItemGroup>
 
   <PropertyGroup>
