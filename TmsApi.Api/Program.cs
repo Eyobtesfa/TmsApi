@@ -359,7 +359,12 @@ builder.Services.AddAntiforgery(options =>
     options.HeaderName = "X-XSRF-TOKEN";
 });
 
+builder.Services.AddProblemDetails();
+
+
 var app = builder.Build();
+
+app.UseStatusCodePages();
 
 app.MapHealthChecks("/health/live", new HealthCheckOptions
 {
@@ -370,7 +375,8 @@ app.MapHealthChecks("/health/ready", new HealthCheckOptions
     Predicate = check => check.Tags.Contains("ready")
 }).DisableRateLimiting();
 
-app.MapHub<TmsHub>("/hubs/tms");
+app.MapHub<TmsHub>("/hubs/tms")
+    .RequireCors("TmsClient");
 
 
 
@@ -470,6 +476,8 @@ app.MapGet("/api/assessments/results", () => Results.Ok(new
     studentId = "S-001",
     letterGrade = "A"
 })).RequireAuthorization();
+
+
 
 
 
