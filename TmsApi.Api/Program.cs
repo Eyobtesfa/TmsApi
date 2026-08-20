@@ -44,6 +44,7 @@ using OpenTelemetry.Trace;
 using OpenTelemetry.Instrumentation.Runtime;
 
 using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -302,7 +303,7 @@ builder.Services.AddHealthChecks()
 .AddCheck("self", () => HealthCheckResult.Healthy("alive"),
 tags: ["live"])
 .AddNpgSql(
-connectionString: builder.Configuration.GetConnectionString("Tms")!,
+connectionString: builder.Configuration.GetConnectionString("TmsDatabase")!,
 name: "postgres",
 tags: ["ready"]);
 
@@ -360,6 +361,26 @@ builder.Services.AddAntiforgery(options =>
 });
 
 builder.Services.AddProblemDetails();
+
+
+
+
+//MODULE-11-1
+builder.Services.AddIdentityCore<TmsUser>(options =>
+{
+    // Enterprise Password Policy
+    options.Password.RequiredLength = 12;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireDigit = true;
+    options.Password.RequireNonAlphanumeric = true;
+
+    // Brute-Force Lockout Protection
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+    options.Lockout.AllowedForNewUsers = true;
+})
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<TmsDbContext>();
 
 
 var app = builder.Build();

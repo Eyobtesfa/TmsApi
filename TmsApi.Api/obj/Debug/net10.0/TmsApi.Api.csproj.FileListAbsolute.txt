@@ -1007,3 +1007,5 @@ C:\Users\hp\tmsapi\TmsApi.Api\bin\Debug\net10.0\Polly.dll
 C:\Users\hp\tmsapi\TmsApi.Api\bin\Debug\net10.0\Polly.Core.dll
 C:\Users\hp\tmsapi\TmsApi.Api\bin\Debug\net10.0\Polly.Extensions.dll
 C:\Users\hp\tmsapi\TmsApi.Api\bin\Debug\net10.0\Polly.RateLimiting.dll
+C:\Users\hp\tmsapi\TmsApi.Api\bin\Debug\net10.0\BCrypt-Net-Next.dll
+C:\Users\hp\tmsapi\TmsApi.Api\bin\Debug\net10.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
